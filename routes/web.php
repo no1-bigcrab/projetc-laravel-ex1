@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\client\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,7 +13,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+//Client
 
 Route::get('/', function () {
     return view('/client/home');
 });
+Route::get('', [HomeController::class, "index"])->name('index-product');

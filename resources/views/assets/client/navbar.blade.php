@@ -8,23 +8,21 @@
             </a>
             <nav class="collapse show navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0" id="navbar-vertical">
                 <div class="navbar-nav w-100 overflow-hidden" style="height: 410px">
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link" data-toggle="dropdown">Dresses <i class="fa fa-angle-down float-right mt-1"></i></a>
-                        <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
-                            <a href="" class="dropdown-item">Men's Dresses</a>
-                            <a href="" class="dropdown-item">Women's Dresses</a>
-                            <a href="" class="dropdown-item">Baby's Dresses</a>
-                        </div>
-                    </div>
-                    <a href="" class="nav-item nav-link">Shirts</a>
-                    <a href="" class="nav-item nav-link">Jeans</a>
-                    <a href="" class="nav-item nav-link">Swimwear</a>
-                    <a href="" class="nav-item nav-link">Sleepwear</a>
-                    <a href="" class="nav-item nav-link">Sportswear</a>
-                    <a href="" class="nav-item nav-link">Jumpsuits</a>
-                    <a href="" class="nav-item nav-link">Blazers</a>
-                    <a href="" class="nav-item nav-link">Jackets</a>
-                    <a href="" class="nav-item nav-link">Shoes</a>
+                    
+                    @foreach ($categories as $category)
+                        @if (!($category->sub_category)->isEmpty())
+                        <div class="nav-item dropdown">
+                                <a href="#" class="nav-link" data-toggle="dropdown">{{ $category->title }}<i class="fa fa-angle-down float-right mt-1"></i></a>
+                                <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
+                                    @foreach ($category->sub_category as $item)
+                                        <a href="" class="dropdown-item">{{ $item->title }}</a>
+                                    @endforeach
+                                </div>
+                            </div>
+                        @else
+                            <a href="" class="nav-item nav-link">{{ $category->title }}</a>
+                        @endif
+                    @endforeach
                 </div>
             </nav>
         </div>
@@ -38,9 +36,9 @@
                 </button>
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav mr-auto py-0">
-                        <a href="/" class="nav-item nav-link active">Home</a>
-                        <a href="/shop" class="nav-item nav-link">Shop</a>
-                        <a href="/detail" class="nav-item nav-link">Shop Detail</a>
+                        <a href="/" class="nav-item nav-link {{ request()->is('/')?"active":"" }}">Home</a>
+                        <a href="/shop" class="nav-item nav-link {{ request()->is('/shop')?"active":"" }}">Shop</a>
+                        <a href="/detail" class="nav-item nav-link {{ request()->is('/detail')?"active":"" }}">Shop Detail</a>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
                             <div class="dropdown-menu rounded-0 m-0">
@@ -48,7 +46,7 @@
                                 <a href="/checkout" class="dropdown-item">Checkout</a>
                             </div>
                         </div>
-                        <a href="/contact" class="nav-item nav-link">Contact</a>
+                        <a href="/contact" class="nav-item nav-link {{ request()->is('/contact')?"active":"" }}">Contact</a>
                     </div>
                     <div class="navbar-nav ml-auto py-0">
                         <a href="/login" class="nav-item nav-link">Login</a>
@@ -64,7 +62,7 @@
                             <div class="p-3" style="max-width: 700px;">
                                 <h4 class="text-light text-uppercase font-weight-medium mb-3">10% Off Your First Order</h4>
                                 <h3 class="display-4 text-white font-weight-semi-bold mb-4">Fashionable Dress</h3>
-                                <a href="" class="btn btn-light py-2 px-3">Shop Now</a>
+                                <a href="/shop" class="btn btn-light py-2 px-3">Shop Now</a>
                             </div>
                         </div>
                     </div>
@@ -74,7 +72,7 @@
                             <div class="p-3" style="max-width: 700px;">
                                 <h4 class="text-light text-uppercase font-weight-medium mb-3">10% Off Your First Order</h4>
                                 <h3 class="display-4 text-white font-weight-semi-bold mb-4">Reasonable Price</h3>
-                                <a href="" class="btn btn-light py-2 px-3">Shop Now</a>
+                                <a href="/shop" class="btn btn-light py-2 px-3">Shop Now</a>
                             </div>
                         </div>
                     </div>
