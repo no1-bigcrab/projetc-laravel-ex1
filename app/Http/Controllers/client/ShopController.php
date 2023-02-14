@@ -5,12 +5,14 @@ namespace App\Http\Controllers\client;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Product;
 
 class ShopController extends Controller
 {
     public function index()
     {
-        $categories= Category::all();
-        return view('/client/shop', compact('categories'));
+        $categories = Category::all();
+        $products = Product::paginate(9);
+        return view('/client/shop', compact('categories', 'products'));
     }
 }
