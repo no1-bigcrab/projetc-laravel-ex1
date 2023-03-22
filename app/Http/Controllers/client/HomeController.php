@@ -20,7 +20,6 @@ class HomeController extends Controller
         $mostViewProduct = Product::all();//co luot view nhieu nhat
         $vendors = Vendor::all();
 
-
         return view('client/home', 
                     compact(
                         'categories', 
